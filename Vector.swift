@@ -1,5 +1,13 @@
 //
 //  Vector.swift
+//  Assignment1
+//
+//  Created by Matthew Lang on 9/2/16.
+//  Copyright © 2016 NexMetu. All rights reserved.
+//
+
+//
+//  Vector.swift
 //  assignment01
 //
 //  Created by Dylan Pringle on 8/31/16.
@@ -8,49 +16,12 @@
 
 import Foundation
 
-/*
- // Constraints for matrix data generic type
- public protocol MatrixData: CustomStringConvertible {
- // Must have a default initialiser
- init()
- // Must provide basic arithmetic operators
- // with itself
- func *(_: Self, _:Self) -> Self
- func /(_: Self, _:Self) -> Self
- func +(_: Self, _:Self) -> Self
- func -(_: Self, _:Self) -> Self
- }
-
-
-// Int, Float and Double alread conform to MatrixData -
-// extend them to inform compiler about this.
-extension Int: MatrixData { }
-extension Float: MatrixData { }
-extension Double: MatrixData { }
- */
-
-public protocol BasicVector: CustomStringConvertible {
-    // Generic data type
-    associatedtype T: MatrixData;
-    // Returns the size of the vector
-    var size: Int { get }
-     // Computes the dot product of the vector with another vector
-   // func dot(v: Vector<T>) -> T
-    // Returns/sets the element value at the given index
-     subscript(index: Int) -> T { get set }
-    // Returns a new object instance that is a copy of the current vector
-    //  func copy() -> Vector<T>
-    
-}
-
-
-
-class Vector <T: MatrixData>: CustomStringConvertible  {
+public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector  {
     
     
     let vectorSize: Int;
     
-    var vector: [T];
+    var vector: Matrix<T>;
     
     // INITIALISERS
     ///////////////////////
@@ -59,7 +30,8 @@ class Vector <T: MatrixData>: CustomStringConvertible  {
         assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
         
         self.vectorSize = size;
-        vector = [T](count: (size+1), repeatedValue: T());
+        vector = Matrix.init(rowNum: 1, colNum: size)
+        
     }
     //////////////////////
     
@@ -67,33 +39,35 @@ class Vector <T: MatrixData>: CustomStringConvertible  {
     // COMPUTED PROPERTIES
     ///////////////////////
     // Returns the description of contents in the vector
-    var description: String {
-        var str: String = "";
-        str += "[ ";
-        for index in 0..<self.vectorSize {
-    
-            str += " \(self.vector[index]) ";
-        }
-        str += " ]\n";
-        return str;
+    public var description: String {
+        return vector.description
     }
     ///////////////////////
     // Returns the size of vector
-    var size: Int {
+    public var size: Int {
         get {
             return self.vectorSize;
         }
     }
     ///////////////////////
     
-
+    
     
     // Returns the calculated 'dot product' of this vector and the passed in vector
-    func dot(v: Vector<T>) -> T {
+    public func dot(v: Vector<T>) -> T {
         
         assert(self.vectorSize == v.size,"Vector must be same size::\n")
         
-        let result = (v[0]*self.vector[0])+(v[1]*self.vector[1])+(v[2]*self.vector[2])
+        var result: T = T()
+        
+        for x in 0 ..< self.vectorSize {
+            if (x == 0) {
+                result = (v.vector[0,x] * self.vector[0,x])
+            }else{
+                result = result + (v.vector[0,x] * self.vector[0,x])
+            }
+            
+        }
         
         return result;
     }
@@ -102,7 +76,7 @@ class Vector <T: MatrixData>: CustomStringConvertible  {
     
     //////////////////////////////////
     // Returns/sets the element value at the given index
-    subscript(index: Int) -> T {
+    public subscript(index: Int) -> T {
         get {
             
             assert(index < self.size,"Index out of bounds of Vector::\n")  //<=== if FALSE condition
@@ -118,14 +92,19 @@ class Vector <T: MatrixData>: CustomStringConvertible  {
         }
     }
     
-    func getObject(index: Int) -> T {
-        
-        return self.vector[index];
+    public func copy() -> Vector<T> {
+        return self.copy()
+    
     }
     
-    func setObject(object: T, index: Int) {
+    private func getObject(index: Int) -> T {
         
-        self.vector[index] = object;
+        return self.vector.getObject(0, column: index)
+    }
+    
+    private func setObject(object: T, index: Int) {
+        
+        self.vector.setObject(object, row: 0, column: index)
     }
     ////////////////////////////////
     

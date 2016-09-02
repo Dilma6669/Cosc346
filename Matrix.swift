@@ -6,57 +6,13 @@
 //  Copyright © 2016 Dylan Pringle. All rights reserved.
 //
 
-import Foundation
-
-// Constraints for matrix data generic type
-public protocol MatrixData: CustomStringConvertible {
-    // Must have a default initialiser
-    init()
-    // Must provide basic arithmetic operators
-    // with itself
-    func *(_: Self, _:Self) -> Self
-    func /(_: Self, _:Self) -> Self
-    func +(_: Self, _:Self) -> Self
-    func -(_: Self, _:Self) -> Self
-}
-
- public protocol BasicMatrix: CustomStringConvertible {
- // Generic data type
- associatedtype T: MatrixData
- // Returns the number of rows in the matrix
- var rows: Int { get }
- // Returns the number of columns in the matrix
- var columns: Int { get }
-
-// Returns a matrix that is a transpose of the current matrix
-
-// var transpose: Matrix<T> { get }
-
-    // Returns/sets the element value at the given row and column index
- subscript(row: Int, column: Int) -> T { get set }
- 
-    // Returns a new object that is a copy of the current matrix
-
-  //  func copy() -> Matrix<T>
- }
-
-
-
-// Int, Float and Double alread conform to MatrixData -
-// extend them to inform compiler about this.
-extension Int: MatrixData { }
-extension Float: MatrixData { }
-extension Double: MatrixData { }
-
-
-
-class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
+public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
     
     var rowNum: Int;
     var colNum: Int;
     
     var matrix: [[T]];
-
+    
     
     // INITIALISERS
     ///////////////////////
@@ -79,11 +35,11 @@ class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
     // COMPUTED PROPERTIES
     ///////////////////////
     // Returns the description of contents in the matrix
-    var description: String {
+    public var description: String {
         var str: String = "";
-        for column in 0..<self.colNum {
+        for row in 0..<self.rowNum {
             str += "[ ";
-            for row in 0..<rowNum {
+            for column in 0..<colNum {
                 str += " \(self.matrix[row][column]) ";
             }
             str += " ]\n";
@@ -92,7 +48,7 @@ class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
     }
     
     // Returns the number of rows in the matrix
-    var rows: Int {
+    public var rows: Int {
         get {
             return self.rowNum;
             
@@ -100,18 +56,18 @@ class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
     }
     
     // Returns the number of columns in the matrix
-    var columns: Int {
+    public var columns: Int {
         get {
             return self.colNum;
         }
     }
     
     // Returns a matrix that is a transpose of the current matrix
-    var transpose: Matrix<T> {
+    public var transpose: Matrix<T> {
         get {
-           // if matrix.isEmpty {
+            // if matrix.isEmpty {
             //    return self;
-           // }
+            // }
             
             // row and column round other way for transpose //
             
@@ -128,10 +84,10 @@ class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
     //////////////////////
     //////////////////////
     
-  
-     
-     // Returns a new object that is a copy of the current matrix
-     func copy() -> Matrix<T> {
+    
+    
+    // Returns a new object that is a copy of the current matrix
+    public func copy() -> Matrix<T> {
         let matrixCopy = Matrix<T>(rowNum: self.rowNum, colNum: self.colNum);
         
         for i in 0 ..< self.rowNum {
@@ -140,15 +96,15 @@ class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
             }
         }
         return matrixCopy;
-     }
-  
+    }
     
     
-
+    
+    
     
     //////////////////////////////////
     // Returns/sets the element value at the given row and column index
-    subscript(row: Int, column: Int) -> T {
+    public subscript(row: Int, column: Int) -> T {
         get {
             
             assert(row<self.rowNum && column<self.colNum,"Index out of bounds of Matrix::\n")  //<=== if FALSE condition
@@ -164,19 +120,16 @@ class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
         }
     }
     
-    func getObject(row: Int, column: Int) -> T {
+    internal func getObject(row: Int, column: Int) -> T {
         
         return self.matrix[row][column];
     }
     
-    func setObject(object: T, row: Int, column: Int) {
+    internal func setObject(object: T, row: Int, column: Int) {
         
         self.matrix[row][column] = object;
     }
     ////////////////////////////////
- 
+    
     
 }
-
-
-
