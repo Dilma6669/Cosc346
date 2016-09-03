@@ -164,13 +164,40 @@ var z = i/2
 print("Matrix arithmetic");
 print(z);
 */
-var v = Vector<Double>(size: 3);
+var v = Vector<Int>(size: 3);
 
-var c = Vector<Double>(size: 3);
+v[0] = 1;
+v[1] = 5;
+v[2] = 1;
+
+var c = Vector<Int>(size: 3);
+
+c[0] = 2;
+c[1] = 5;
+c[2] = 2;
 
 var q = v+c;
 
 print("Vector arithmetic")
 print(q);
+
+var i = Matrix<Int>(rowNum: 4, colNum: 4);
+
+i[-1,0] = 1;
+i[0,1] = 2;
+i[1,0] = 3;
+i[1,1] = 3;
+i[2,0] = 2;
+i[2,1] = 1;
+
+i[3,3] = 9;
+
+print("Matrix I");  // <<<<<<<<<< ============ MATRIX
+print(i);
+
+var arow: Vector<Int> = i.row(3);
+
+print(arow);
+
 
 

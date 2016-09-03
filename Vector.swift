@@ -33,6 +33,15 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         vector = Matrix.init(rowNum: 1, colNum: size)
         
     }
+    
+    init(size: Int, Input: Matrix<T>){
+        
+        assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
+        
+        vectorSize = size;
+        vector = Input;
+        
+    }
     //////////////////////
     
     
@@ -124,14 +133,14 @@ public func *<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> T {
 // Addition
 public func +<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T>  {
     
-    return lhs*rhs;  //<<<<============== here
+    return Vector(size: lhs.size, Input: lhs.vector+rhs.vector)//<<<<============== here
    
 }
 
 // Subtraction
 public func -<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T>{
     
-    
+    return Vector(size: lhs.size, Input: lhs.vector-rhs.vector)
     
 }
 
@@ -139,24 +148,25 @@ public func -<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T>{
 // VECTOR and SCALAR operators
 public func +<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
     
-    
+    return Vector(size: lhs.size, Input: lhs.vector+rhs)
 }
 
 public func -<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
     
+    return Vector(size: lhs.size, Input:lhs.vector+rhs)
    
 }
 
 
 public func *<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
     
-    
+    return Vector(size: lhs.size, Input:lhs.vector*rhs)
     
 }
 
 public func /<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
     
-    
+    return Vector(size: lhs.size, Input:lhs.vector/rhs)
     
 }
 ////////////////////////

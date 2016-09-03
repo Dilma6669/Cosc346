@@ -8,8 +8,8 @@
 
 public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, MatrixArithmetic {
     
-    var rowNum: Int;
-    var colNum: Int;
+    private let rowNum: Int;
+    private let colNum: Int;
     
     var matrix: [[T]];
     
@@ -108,6 +108,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
         get {
             
             assert(row<self.rowNum && column<self.colNum,"Index out of bounds of Matrix::\n")  //<=== if FALSE condition
+            assert(row>=0 && column>=0,"Index cannot be a negative number::\n")  //<=== if FALSE condition
             
             return self.getObject(row, column: column);
         }
@@ -115,6 +116,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
         set(newObject) {
             
             assert(row<self.rowNum && column<self.colNum,"Index out of bounds of Matrix::\n")  //<=== if FALSE condition
+            assert(row>=0 && column>=0,"Index cannot be a negative number::\n")  //<=== if FALSE condition
             
             self.setObject(newObject, row: row, column: column)
         }
@@ -131,6 +133,56 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
     }
     ////////////////////////////////
     
+    
+    // CONVERSION
+    ////////////////////////////////
+    var vectorview: Vector<T> {
+        
+        get {
+            
+            let vectorConvert: Matrix<T> = Matrix(rowNum: 1, colNum: self.colNum);
+            
+                for y in 0 ..< self.colNum {
+                    vectorConvert[0,y] = self.matrix[0][y];
+            }
+            
+            return vectorConvert;
+        }
+        
+    }
+    
+    
+    // Select row vector from matrix
+    public func row(index: Int) -> Vector<T> {
+        
+        assert(index<self.rowNum && index>=0,"Index out of bounds of Matrix::\n")  //<=== if FALSE condition
+        
+        let vector = Vector<T>(size: self.colNum);
+        
+        for y in 0 ..< self.colNum {
+            vector[y] = self.matrix[index][y];
+        }
+        
+        return vector;
+    }
+    
+    
+    // Select column vector from matrix
+    public func column(index: Int) -> Vector<T> {
+        
+        assert(index<self.colNum && index>=0,"Index out of bounds of Matrix::\n")  //<=== if FALSE condition
+        
+        let vector = Vector<T>(size: self.rowNum);
+        
+        for y in 0 ..< self.rowNum {
+            vector[y] = self.matrix[y][index];
+        }
+        
+        return vector;
+        
+    }
+    
+ 
     
 }
 
