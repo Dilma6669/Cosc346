@@ -6,7 +6,7 @@
 //  Copyright © 2016 Dylan Pringle. All rights reserved.
 //
 
-public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
+public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, MatrixArithmetic {
     
     var rowNum: Int;
     var colNum: Int;
@@ -133,3 +133,123 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix {
     
     
 }
+
+// MATRIX ARTHIMETIC //////
+
+
+//////////////////////
+// Matrix and Matrix operators
+// Multiplication
+public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+    
+    assert(lhs.colNum == rhs.rowNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
+    
+    let matrixMultiply = Matrix<T>(rowNum: lhs.rowNum, colNum: rhs.colNum);
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< rhs.colNum
+        {
+            for sum in 0 ..< rhs.rowNum
+            {
+                matrixMultiply[x,y] = matrixMultiply[x,y] + lhs[x,sum] * rhs[sum,y];
+            }
+        }
+    }
+    return matrixMultiply;
+}
+
+
+// Addition
+ public func +<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+ 
+    assert(lhs.rowNum == rhs.rowNum && lhs.colNum == rhs.colNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
+    
+    let matrixAddition = Matrix<T>(rowNum: lhs.rowNum, colNum: rhs.colNum);
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< rhs.colNum
+        {
+            matrixAddition[x,y] = lhs[x,y] + rhs[x,y];
+        }
+    }
+    return matrixAddition;
+ }
+
+// Subtraction
+ public func -<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+ 
+    assert(lhs.rowNum == rhs.rowNum && lhs.colNum == rhs.colNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
+    
+    let matrixSubtraction = Matrix<T>(rowNum: lhs.rowNum, colNum: rhs.colNum);
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< rhs.colNum
+        {
+            matrixSubtraction[x,y] = lhs[x,y] - rhs[x,y];
+        }
+    }
+    return matrixSubtraction;
+ }
+
+
+//////////////////////////
+// MATRIX and SCALAR operators
+public func +<T: MatrixData>(lhs: Matrix<T>, rhs:T) -> Matrix<T> {
+ 
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< lhs.colNum
+        {
+            lhs[x,y] = lhs[x,y] + rhs;
+        }
+    }
+     return lhs;
+ }
+
+public func -<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
+    
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< lhs.colNum
+        {
+            lhs[x,y] = lhs[x,y] - rhs;
+        }
+    }
+    return lhs;
+}
+
+
+public func *<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
+
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< lhs.colNum
+        {
+            lhs[x,y] = lhs[x,y] * rhs;
+        }
+    }
+    return lhs;
+ 
+ }
+
+ public func /<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
+    
+    
+    for x in 0..<lhs.rowNum
+    {
+        for y in 0 ..< lhs.colNum
+        {
+            lhs[x,y] = lhs[x,y] / rhs;
+        }
+    }
+    return lhs;
+ 
+ }
+///////////////////////////
+

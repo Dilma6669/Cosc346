@@ -16,7 +16,7 @@
 
 import Foundation
 
-public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector  {
+public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, VectorArithmetic  {
     
     
     let vectorSize: Int;
@@ -107,6 +107,57 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector  {
         self.vector.setObject(object, row: 0, column: index)
     }
     ////////////////////////////////
+
+}
+// VECTOR ARTHIMETIC //////
+
+
+//////////////////////
+// VECTOR and VECTOR operators
+// Multiplication
+public func *<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> T {
+    
+    return lhs.dot(rhs);
+}
+
+
+// Addition
+public func +<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T>  {
+    
+    return lhs*rhs;  //<<<<============== here
+   
+}
+
+// Subtraction
+public func -<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T>{
+    
     
     
 }
+
+
+// VECTOR and SCALAR operators
+public func +<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
+    
+    
+}
+
+public func -<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
+    
+   
+}
+
+
+public func *<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
+    
+    
+    
+}
+
+public func /<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
+    
+    
+    
+}
+////////////////////////
+

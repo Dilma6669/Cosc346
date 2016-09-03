@@ -9,9 +9,9 @@
 import Foundation
 
 //MATRIX TESTING//
-
+/*
 //var z = MyMatrixClass<Double>(rowNum: 3, colNum: 3);
-var i = Matrix<Double>(rowNum: 9, colNum: 9);
+var i = Matrix<Int>(rowNum: 3, colNum: 5);
 
 // print matrix
 print("Matrix");  // <<<<<<<<<< ============ MATRIX
@@ -123,6 +123,54 @@ b[1] = 2;
 var y: Int = b[1];
 
 print(y);
+*/
+/*
+var i = Matrix<Double>(rowNum: 4, colNum: 4);
 
+i[0,0] = 1;
+i[0,1] = 2;
+i[1,0] = 3;
+i[1,1] = 3;
+i[2,0] = 2;
+i[2,1] = 1;
+
+i[3,3] = 9;
+
+print("Matrix I");  // <<<<<<<<<< ============ MATRIX
+print(i);
+
+var t = i.transpose;
+
+print("Matrix trans");  // <<<<<<<<<< ============ MATRIX
+print(t);
+
+var j = Matrix<Double>(rowNum: 4, colNum: 4);
+
+j[0,0] = 1;
+j[0,1] = 5;
+j[1,0] = 1;
+j[1,1] = 3;
+j[2,0] = 5;
+j[2,1] = 1;
+
+j[3,3] = 9;
+
+print("Matrix J");  // <<<<<<<<<< ============ MATRIX
+print(j);
+//var z = i*(j);
+
+var z = i/2
+
+print("Matrix arithmetic");
+print(z);
+*/
+var v = Vector<Double>(size: 3);
+
+var c = Vector<Double>(size: 3);
+
+var q = v+c;
+
+print("Vector arithmetic")
+print(q);
 
 
