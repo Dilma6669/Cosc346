@@ -16,17 +16,17 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
     
     // INITIALISERS
     ///////////////////////
-    init(rowNum: Int, colNum: Int) {
+    init(rows: Int, columns: Int) {
         
-        assert(rowNum>0 && colNum>0,"Matrix size must be larger than zero::\n")  //<=== if FALSE condition
+        assert(rows>0 && columns>0,"Matrix size must be larger than zero::\n")  //<=== if FALSE condition
         
-        self.rowNum = rowNum;
-        self.colNum = colNum;
+        self.rowNum = rows;
+        self.colNum = columns;
         matrix = [[T]](count: (rowNum+1), repeatedValue: [T](count: (colNum+1), repeatedValue: T()))
     }
     
     convenience init() {
-        self.init(rowNum: Int(), colNum: Int());
+        self.init(rows: Int(), columns: Int());
     }
     ///////////////////////
     
@@ -71,7 +71,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
             
             // row and column round other way for transpose //
             
-            let matrixTrans = Matrix<T>(rowNum: self.colNum, colNum: self.rowNum);
+            let matrixTrans = Matrix<T>(rows: self.colNum, columns: self.rowNum);
             
             for i in 0 ..< self.rowNum {
                 for j in 0 ..< self.colNum {
@@ -88,7 +88,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
     
     // Returns a new object that is a copy of the current matrix
     public func copy() -> Matrix<T> {
-        let matrixCopy = Matrix<T>(rowNum: self.rowNum, colNum: self.colNum);
+        let matrixCopy = Matrix<T>(rows: self.rowNum, columns: self.colNum);
         
         for i in 0 ..< self.rowNum {
             for j in 0 ..< self.colNum {
@@ -136,17 +136,17 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
     
     // CONVERSION
     ////////////////////////////////
-    var vectorview: Vector<T> {
+    public var vectorview: Vector<T> {
         
         get {
             
-            let vectorConvert: Matrix<T> = Matrix(rowNum: 1, colNum: self.colNum);
+            let vector = Vector<T>(size: self.colNum);
             
-                for y in 0 ..< self.colNum {
-                    vectorConvert[0,y] = self.matrix[0][y];
+            for y in 0 ..< self.colNum {
+                vector[y] = self.matrix[0][y];
             }
             
-            return vectorConvert;
+            return vector;
         }
         
     }
@@ -196,7 +196,7 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
     
     assert(lhs.colNum == rhs.rowNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
     
-    let matrixMultiply = Matrix<T>(rowNum: lhs.rowNum, colNum: rhs.colNum);
+    let matrixMultiply = Matrix<T>(rows: lhs.rowNum, columns: rhs.colNum);
     
     for x in 0..<lhs.rowNum
     {
@@ -217,7 +217,7 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
  
     assert(lhs.rowNum == rhs.rowNum && lhs.colNum == rhs.colNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
     
-    let matrixAddition = Matrix<T>(rowNum: lhs.rowNum, colNum: rhs.colNum);
+    let matrixAddition = Matrix<T>(rows: lhs.rowNum, columns: rhs.colNum);
     
     for x in 0..<lhs.rowNum
     {
@@ -234,7 +234,7 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
  
     assert(lhs.rowNum == rhs.rowNum && lhs.colNum == rhs.colNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
     
-    let matrixSubtraction = Matrix<T>(rowNum: lhs.rowNum, colNum: rhs.colNum);
+    let matrixSubtraction = Matrix<T>(rows: lhs.rowNum, columns: rhs.colNum);
     
     for x in 0..<lhs.rowNum
     {

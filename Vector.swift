@@ -30,7 +30,7 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
         
         self.vectorSize = size;
-        vector = Matrix.init(rowNum: 1, colNum: size)
+        vector = Matrix.init(rows: 1, columns: size)
         
     }
     

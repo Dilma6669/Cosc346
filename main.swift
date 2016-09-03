@@ -163,7 +163,7 @@ var z = i/2
 
 print("Matrix arithmetic");
 print(z);
-*/
+
 var v = Vector<Int>(size: 3);
 
 v[0] = 1;
@@ -183,7 +183,7 @@ print(q);
 
 var i = Matrix<Int>(rowNum: 4, colNum: 4);
 
-i[-1,0] = 1;
+i[0,0] = 1;
 i[0,1] = 2;
 i[1,0] = 3;
 i[1,1] = 3;
@@ -198,6 +198,19 @@ print(i);
 var arow: Vector<Int> = i.row(3);
 
 print(arow);
+*/
 
+var v: Vector<Float> = Vector<Float>(size: 3)
 
+//var A: Matrix<Float> = v.matrixview
+
+var M: Matrix<Float> = Matrix<Float>(rows:2, columns: 3)
+
+var arow: Vector<Float> = M.row(1)
+
+var acol: Vector<Float> = M.column(0)
+
+var B: Matrix<Float> = arow.vectorview
+
+var C: Matrix<Float> = acol.vectorview
 
