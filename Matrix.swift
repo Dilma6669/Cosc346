@@ -6,7 +6,7 @@
 //  Copyright © 2016 Dylan Pringle. All rights reserved.
 //
 
-public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, MatrixArithmetic {
+public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, MatrixArithmetic {
     
     private let rowNum: Int;
     private let colNum: Int;
@@ -139,14 +139,14 @@ public class Matrix <T: MatrixData>: CustomStringConvertible, BasicMatrix, Matri
     public var vectorview: Vector<T> {
         
         get {
-            
-            let vector = Vector<T>(size: self.colNum);
-            
-            for y in 0 ..< self.colNum {
-                vector[y] = self.matrix[0][y];
+            var returnVector : Vector<T>
+            assert(rowNum == 1 || colNum == 1, "can only vectorview if there is only one row or one column")
+            if (rowNum == 1) {
+                returnVector = Vector<T>(size: self.colNum, Input: self.copy(), Colview: true)
+            }else{
+                returnVector = Vector<T>(size: self.rowNum, Input: self.copy())
             }
-            
-            return vector;
+            return returnVector
         }
         
     }

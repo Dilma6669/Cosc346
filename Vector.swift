@@ -16,19 +16,21 @@
 
 import Foundation
 
-public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, VectorArithmetic  {
+public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, VectorArithmetic{
     
     
     let vectorSize: Int;
     
     var vector: Matrix<T>;
     
+    var Colaxis: Bool;
+    
     // INITIALISERS
     ///////////////////////
     init(size:Int) {
         
         assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
-        
+        self.Colaxis = false
         self.vectorSize = size;
         vector = Matrix.init(rows: 1, columns: size)
         
@@ -37,10 +39,16 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
     init(size: Int, Input: Matrix<T>){
         
         assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
+        self.Colaxis = false
+        self.vectorSize = size;
+        self.vector = Input;
         
-        vectorSize = size;
-        vector = Input;
-        
+    }
+
+    init(size: Int, Input: Matrix<T>, Colview: Bool){
+        self.vectorSize = size;
+        self.vector = Input;
+        self.Colaxis = Colview
     }
     //////////////////////
     
@@ -49,7 +57,15 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
     ///////////////////////
     // Returns the description of contents in the vector
     public var description: String {
-        return vector.description
+        if (Colaxis == false){
+            return vector.description
+        }else{
+            var str: String = ""
+            for column in 0..<vectorSize {
+                str += "[ \(self.vector[0,column]) ]\n"
+            }
+            return str
+        }
     }
     ///////////////////////
     // Returns the size of vector
@@ -81,8 +97,13 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         return result;
     }
     
+    //////////////////////////////////
+    // CONVERSION
+    
+    //public func matrixview {
     
     
+    //}
     //////////////////////////////////
     // Returns/sets the element value at the given index
     public subscript(index: Int) -> T {
@@ -164,7 +185,14 @@ public func *<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
     
 }
 
-public func /<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
+public func /<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{  // need assert to not be able to be devided by zero
+    
+    
+    
+   // Int(myIntValue);
+    let check = T()
+    
+    assert(check != rhs, "Cannot devide by zero");
     
     return Vector(size: lhs.size, Input:lhs.vector/rhs)
     

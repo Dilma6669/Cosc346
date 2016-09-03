@@ -210,7 +210,7 @@ var arow: Vector<Float> = M.row(1)
 
 var acol: Vector<Float> = M.column(0)
 
-var B: Matrix<Float> = arow.vectorview
+//var B: Matrix<Float> = arow.matrixview
 
-var C: Matrix<Float> = acol.vectorview
+//var C: Matrix<Float> = acol.matrixview
 
