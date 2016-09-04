@@ -150,7 +150,7 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
     
     public func copy() -> Vector<T> {
         return self.copy()
-    
+        
     }
     
     private func getObject(index: Int) -> T {
