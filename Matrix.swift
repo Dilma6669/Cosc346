@@ -26,7 +26,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
     }
     
     convenience init() {
-        self.init(rows: Int(), columns: Int());
+        self.init(rows: 1, columns: 1);
     }
     
     

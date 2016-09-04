@@ -9,7 +9,7 @@
 import Foundation
 
 // Constraints for matrix data generic type
-public protocol MatrixData: CustomStringConvertible {
+public protocol MatrixData: CustomStringConvertible, Equatable {
     // Must have a default initialiser
     init()
     // Must provide basic arithmetic operators
