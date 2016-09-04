@@ -199,7 +199,7 @@ var arow: Vector<Int> = i.row(3);
 
 print(arow);
 */
-
+/*
 var v: Vector<Float> = Vector<Float>(size: 3)
 
 print("Vector v (size: 3)");  // <<<<<<<<<< ============ Vector
@@ -252,3 +252,30 @@ C[0,2] = 3;
 
 print("Matrix C (changed input), =acol.matrixview");  // <<<<<<<<<< ============ Matrix
 print(C);
+*/
+/*
+var F = Matrix<Fraction>(rows: 1, columns: 2)
+F[0,0] = Fraction(num: -12, den: 8)
+F[0,1] = Fraction(num: -2, den: 10)
+
+var S = F[0,0]/F[0,1];
+
+print(S);
+ 
+print(F);
+
+var V = Matrix<Complex>(rows: 1, columns: 2)
+
+V[0,0] = Complex(real: 1.2, imag: -3.6)
+V[0,1] = Complex(real: -4.2, imag: -5.2)
+
+print(V);
+
+var X = V[0,0]*V[0,1];
+
+print(X);
+
+*/
+
+
+

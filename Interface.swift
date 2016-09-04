@@ -9,7 +9,7 @@
 import Foundation
 
 // Constraints for matrix data generic type
-public protocol MatrixData: CustomStringConvertible, Equatable{
+public protocol MatrixData: CustomStringConvertible {
     // Must have a default initialiser
     init()
     // Must provide basic arithmetic operators
@@ -25,6 +25,9 @@ public protocol MatrixData: CustomStringConvertible, Equatable{
 extension Int: MatrixData { }
 extension Float: MatrixData { }
 extension Double: MatrixData { }
+extension Complex: MatrixData { }
+extension Fraction: MatrixData { }
+
 
 public protocol BasicMatrix: CustomStringConvertible {
     // Generic data type
@@ -54,7 +57,7 @@ public protocol BasicVector: CustomStringConvertible {
     func copy() -> Vector<T>
 }
 
-public protocol MatrixArithmetic: BasicMatrix {
+public protocol MatrixArithmetic: BasicMatrix{
     // Generic data type
     associatedtype T: MatrixData
     // Matrix and Matrix operators

@@ -323,7 +323,6 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
 
  public func /<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
     
-    
     for x in 0..<lhs.rowNum
     {
         for y in 0 ..< lhs.colNum

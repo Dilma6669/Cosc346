@@ -16,7 +16,7 @@
 
 import Foundation
 
-public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, VectorArithmetic{
+public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, VectorArithmetic {
     
     
     let vectorSize: Int;
@@ -218,7 +218,7 @@ public func /<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{  // need asser
    // Int(myIntValue);
     let check = T()
     
-    assert(check != rhs, "Cannot devide by zero");
+  //  assert(check != rhs, "Cannot devide by zero");
     
     return Vector(size: lhs.size, Input:lhs.vector/rhs)
     
