@@ -202,15 +202,53 @@ print(arow);
 
 var v: Vector<Float> = Vector<Float>(size: 3)
 
-//var A: Matrix<Float> = v.matrixview
+print("Vector v (size: 3)");  // <<<<<<<<<< ============ Vector
+print(v);
 
-var M: Matrix<Float> = Matrix<Float>(rows:2, columns: 3)
+var A: Matrix<Float> = v.matrixview
 
-var arow: Vector<Float> = M.row(1)
+print("Matrix A, = v.matrixview");  // <<<<<<<<<< ============ MAtrix
+print(A);
 
-var acol: Vector<Float> = M.column(0)
+var M: Matrix<Float> = Matrix<Float>(rows:4, columns: 5)
 
-//var B: Matrix<Float> = arow.matrixview
+print("Matrix M, =(rows:2, columns: 3)");  // <<<<<<<<<< ============ MAtrix
+print(M);
 
-//var C: Matrix<Float> = acol.matrixview
+M[0,0] = 5;
+M[0,1] = 7;
+M[1,1] = 3;
+M[1,2] = 6;
+M[0,4] = 2;
 
+M[2,4] = 8;
+
+print("Matrix M (with input), =(rows:2, columns: 3)");  // <<<<<<<<<< ============ MAtrix
+print(M);
+
+var arow: Vector<Float> = M.row(2)
+
+print("Vector arow, =M.row(2)");  // <<<<<<<<<< ============ Vector
+print(arow);
+
+var acol: Vector<Float> = M.column(1)
+
+print("Vector acol, =M.column(1)");  // <<<<<<<<<< ============ Vector
+print(acol);
+
+var B: Matrix<Float> = arow.matrixview
+
+print("Matrix B, =arow.matrixview");  // <<<<<<<<<< ============ Matrix
+print(B);
+
+var C: Matrix<Float> = acol.matrixview
+
+print("Matrix C, =acol.matrixview");  // <<<<<<<<<< ============ Matrix
+print(C);
+
+C[0,0] = 5;
+C[0,1] = 7;
+C[0,2] = 3;
+
+print("Matrix C (changed input), =acol.matrixview");  // <<<<<<<<<< ============ Matrix
+print(C);

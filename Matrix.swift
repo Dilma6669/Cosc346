@@ -28,6 +28,37 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
     convenience init() {
         self.init(rows: Int(), columns: Int());
     }
+    
+    
+    
+    init(rows: Int, columns: Int, Input: Matrix<T>){
+        
+      //  assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
+      
+        self.rowNum = rows;
+        self.colNum = columns;
+        
+        matrix = [[T]](count: (rowNum+1), repeatedValue: [T](count: (colNum+1), repeatedValue: T()));
+        
+        for column in 0..<colNum {
+            
+            self.matrix[0][column] = Input[0,column];
+        }
+     
+      //  self.Colaxis = false;
+        
+    }
+    
+    
+    /*
+    init(rows: Int, Input: Vector<T>, Colview: Bool){
+        self.rowNum = rows;
+        self.colNum = Input.size;
+        
+        self.vector = Input;
+        self.Colaxis = Colview
+    }
+ */
     ///////////////////////
     
     
@@ -172,7 +203,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
         
         assert(index<self.colNum && index>=0,"Index out of bounds of Matrix::\n")  //<=== if FALSE condition
         
-        let vector = Vector<T>(size: self.rowNum);
+        let vector = Vector<T>(size: self.rowNum, col: true);
         
         for y in 0 ..< self.rowNum {
             vector[y] = self.matrix[y][index];

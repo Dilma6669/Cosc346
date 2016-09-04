@@ -35,6 +35,15 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         vector = Matrix.init(rows: 1, columns: size)
         
     }
+    init(size:Int, col: Bool) {
+        
+        assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
+        self.Colaxis = col;
+        self.vectorSize = size;
+        vector = Matrix.init(rows: 1, columns: size)
+        
+    }
+    
     
     init(size: Int, Input: Matrix<T>){
         
@@ -50,6 +59,8 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         self.vector = Input;
         self.Colaxis = Colview
     }
+    
+    
     //////////////////////
     
     
@@ -100,7 +111,22 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
     //////////////////////////////////
     // CONVERSION
     
-    //public func matrixview {
+    public var matrixview: Matrix<T>{
+     
+        get {
+            var returnMatrix : Matrix<T>;
+            
+          //  assert(self.ve == 1 || colNum == 1, "can only matrixview if there is only one row or one column")
+            
+        //    if (rowNum == 1) {
+         // //      returnMatrix = Matrix<T>(rows: 1, Input: self.copy(), Colview: true)
+          //  }else{
+            
+            returnMatrix = Matrix<T>(rows: 1, columns: self.vectorSize, Input: self.vector)
+         //   }
+            return returnMatrix
+        }
+    }
     
     
     //}
