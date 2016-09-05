@@ -20,7 +20,7 @@ import Foundation
  
  */
 
-final class Fraction: CustomStringConvertible, Equatable {
+final class Fraction: CustomStringConvertible, Equatable{
     
     // STORED PROPERTIES
     
@@ -482,4 +482,3 @@ func ==(lhs: Fraction, rhs: Fraction) -> Bool {
         return false
     }
 }
-

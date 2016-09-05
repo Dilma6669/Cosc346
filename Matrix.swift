@@ -29,12 +29,13 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
         self.init(rows: 1, columns: 1);
     }
     
+
     
     
     init(rows: Int, columns: Int, Input: Matrix<T>){
         
-      //  assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
-      
+        //  assert(size > 0,"Vector size must be larger than zero::\n")  //<=== if FALSE condition
+        
         self.rowNum = rows;
         self.colNum = columns;
         
@@ -44,21 +45,21 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
             
             self.matrix[0][column] = Input[0,column];
         }
-     
-      //  self.Colaxis = false;
+        
+        //  self.Colaxis = false;
         
     }
     
     
     /*
-    init(rows: Int, Input: Vector<T>, Colview: Bool){
-        self.rowNum = rows;
-        self.colNum = Input.size;
-        
-        self.vector = Input;
-        self.Colaxis = Colview
-    }
- */
+     init(rows: Int, Input: Vector<T>, Colview: Bool){
+     self.rowNum = rows;
+     self.colNum = Input.size;
+     
+     self.vector = Input;
+     self.Colaxis = Colview
+     }
+     */
     ///////////////////////
     
     
@@ -104,9 +105,10 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
             
             let matrixTrans = Matrix<T>(rows: self.colNum, columns: self.rowNum);
             
-            for i in 0 ..< self.rowNum {
-                for j in 0 ..< self.colNum {
+            for i in 0 ..< self.colNum {
+                for j in 0 ..< self.rowNum {
                     matrixTrans[j,i] = self.matrix[i][j];
+
                 }
             }
             return matrixTrans;
@@ -153,12 +155,12 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
         }
     }
     
-    internal func getObject(row: Int, column: Int) -> T {
+    public func getObject(row: Int, column: Int) -> T {
         
         return self.matrix[row][column];
     }
     
-    internal func setObject(object: T, row: Int, column: Int) {
+    public func setObject(object: T, row: Int, column: Int) {
         
         self.matrix[row][column] = object;
     }
@@ -213,7 +215,7 @@ public class Matrix <T: MatrixData>: CustomStringConvertible,  BasicMatrix, Matr
         
     }
     
- 
+    
     
 }
 
@@ -244,8 +246,8 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
 
 
 // Addition
- public func +<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
- 
+public func +<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+    
     assert(lhs.rowNum == rhs.rowNum && lhs.colNum == rhs.colNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
     
     let matrixAddition = Matrix<T>(rows: lhs.rowNum, columns: rhs.colNum);
@@ -258,11 +260,11 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         }
     }
     return matrixAddition;
- }
+}
 
 // Subtraction
- public func -<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
- 
+public func -<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
+    
     assert(lhs.rowNum == rhs.rowNum && lhs.colNum == rhs.colNum,"Matrix row and/or column mismatch for arithemtic::\n")  //<=== if FALSE condition
     
     let matrixSubtraction = Matrix<T>(rows: lhs.rowNum, columns: rhs.colNum);
@@ -275,13 +277,13 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: Matrix<T>) -> Matrix<T> {
         }
     }
     return matrixSubtraction;
- }
+}
 
 
 //////////////////////////
 // MATRIX and SCALAR operators
 public func +<T: MatrixData>(lhs: Matrix<T>, rhs:T) -> Matrix<T> {
- 
+    
     
     for x in 0..<lhs.rowNum
     {
@@ -290,8 +292,8 @@ public func +<T: MatrixData>(lhs: Matrix<T>, rhs:T) -> Matrix<T> {
             lhs[x,y] = lhs[x,y] + rhs;
         }
     }
-     return lhs;
- }
+    return lhs;
+}
 
 public func -<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
     
@@ -308,7 +310,7 @@ public func -<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
 
 
 public func *<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
-
+    
     
     for x in 0..<lhs.rowNum
     {
@@ -318,10 +320,10 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
         }
     }
     return lhs;
- 
- }
+    
+}
 
- public func /<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
+public func /<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
     
     for x in 0..<lhs.rowNum
     {
@@ -331,7 +333,6 @@ public func *<T: MatrixData>(lhs: Matrix<T>, rhs: T) -> Matrix<T> {
         }
     }
     return lhs;
- 
- }
+    
+}
 ///////////////////////////
-

@@ -29,6 +29,8 @@ extension Complex: MatrixData { }
 extension Fraction: MatrixData { }
 
 
+
+
 public protocol BasicMatrix: CustomStringConvertible {
     // Generic data type
     associatedtype T: MatrixData

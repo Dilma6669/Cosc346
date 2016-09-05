@@ -53,7 +53,7 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         self.vector = Input;
         
     }
-
+    
     init(size: Int, Input: Matrix<T>, Colview: Bool){
         self.vectorSize = size;
         self.vector = Input;
@@ -112,18 +112,18 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
     // CONVERSION
     
     public var matrixview: Matrix<T>{
-     
+        
         get {
             var returnMatrix : Matrix<T>;
             
-          //  assert(self.ve == 1 || colNum == 1, "can only matrixview if there is only one row or one column")
+            //  assert(self.ve == 1 || colNum == 1, "can only matrixview if there is only one row or one column")
             
-        //    if (rowNum == 1) {
-         // //      returnMatrix = Matrix<T>(rows: 1, Input: self.copy(), Colview: true)
-          //  }else{
+            //    if (rowNum == 1) {
+            // //      returnMatrix = Matrix<T>(rows: 1, Input: self.copy(), Colview: true)
+            //  }else{
             
             returnMatrix = Matrix<T>(rows: 1, columns: self.vectorSize, Input: self.vector)
-         //   }
+            //   }
             return returnMatrix
         }
     }
@@ -163,7 +163,7 @@ public class Vector <T: MatrixData>: CustomStringConvertible, BasicVector, Vecto
         self.vector.setObject(object, row: 0, column: index)
     }
     ////////////////////////////////
-
+    
 }
 // VECTOR ARTHIMETIC //////
 
@@ -181,7 +181,7 @@ public func *<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> T {
 public func +<T: MatrixData>(lhs: Vector<T>, rhs: Vector<T>) -> Vector<T>  {
     
     return Vector(size: lhs.size, Input: lhs.vector+rhs.vector)//<<<<============== here
-   
+    
 }
 
 // Subtraction
@@ -201,7 +201,7 @@ public func +<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
 public func -<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
     
     return Vector(size: lhs.size, Input:lhs.vector+rhs)
-   
+    
 }
 
 
@@ -212,13 +212,7 @@ public func *<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{
 }
 
 public func /<T: MatrixData>(lhs: Vector<T>, rhs:T) -> Vector<T>{  // need assert to not be able to be devided by zero
-    
-    
-    
-   // Int(myIntValue);
-    let check = T()
-    
-  //  assert(check != rhs, "Cannot devide by zero");
+
     
     return Vector(size: lhs.size, Input:lhs.vector/rhs)
     
